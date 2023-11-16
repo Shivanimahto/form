@@ -1,0 +1,79 @@
+
+<form [formGroup]="editContact" (ngSubmit)="updateContact()">
+<!-- <div class="form-group">
+  <label for="name">Name</label>
+  <input type="text" class="form-control" formControlName="name">
+</div> -->
+
+<mat-form-field class="example-form-field">
+  <mat-label>Name</mat-label>
+  <input matInput type="text" formControlName="name">
+</mat-form-field>
+<br>
+<div formArrayName="emails">
+  <div>
+    <button type="button" class="btn btn-success" (click)="onEditEmail()">Edit Email</button>
+  </div>
+  <br>
+  <!-- <div *ngFor="let email of emailControls.controls; let f = index;">
+    <input type="text" [formControlName]="f">
+  </div> -->
+  <div *ngFor="let email of emailControls.controls; let f=index;">
+    <mat-form-field class="example-form-field">
+     <input matInput type="text"  [formControlName]="f">
+   </mat-form-field>
+   </div>
+</div>
+<br>
+<!-- <div class="form-group">
+  <label for="password">Password</label>
+  <input type="text" class="form-control" formControlName="password">
+</div> -->
+
+<mat-form-field class="example-form-field">
+  <mat-label>Password</mat-label>
+  <input matInput type="text" formControlName="password">
+</mat-form-field>
+<br>
+<!-- <div class="form-group">
+  <label for="country">Select Country</label>
+  <select formControlName="country" class="form-control" >
+    <option value="india">India</option>
+    <option value="usa">USA</option>
+    <option value="japan">Japan</option>
+    <option value="nepal">Nepal</option>
+    <option value="pakistan">pakistan</option>
+   </select>
+   </div> -->
+
+
+   <mat-form-field class="example-form-field">
+    <mat-label for="country">Edit Country</mat-label>
+    <mat-select formControlName="country" >
+      <mat-option value="india">India</mat-option>
+      <mat-option value="usa">USA</mat-option>
+      <mat-option value="japan">Japan</mat-option>
+      <mat-option value="nepal">Nepal</mat-option>
+      <mat-option value="pakistan">pakistan</mat-option>
+       </mat-select>
+    </mat-form-field>
+  <br>
+
+  <div formArrayName="phones">
+    <div>
+      <button type="button" class="btn btn-success" (click)="onEditPhone()">Edit Phone Number</button>
+    </div>
+    <br>
+    <!-- <div *ngFor="let phone of phoneControls.controls; let i=index;">
+     <input type="text" [formControlName]="i">
+    </div> -->
+    <div *ngFor="let phone of phoneControls.controls; let i=index;">
+      <mat-form-field class="example-form-field">
+       <mat-label>Edit Number</mat-label>
+       <input matInput type="text" [formControlName]="i">
+     </mat-form-field>
+     </div>
+  </div>
+  <br>
+<button type="submit" class="btn btn-dark btn-sm">Update</button>
+</form>

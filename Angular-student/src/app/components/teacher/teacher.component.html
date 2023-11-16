@@ -1,0 +1,163 @@
+<form [formGroup]="teacherForm" (ngSubmit)="insertTeacher()">
+  <!-- <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <span style="color:red" *ngIf="teacherForm.controls['name'] && teacherForm.controls['name'].invalid && teacherForm.controls['name'].touched">This input field is not valid</span>
+  </div> -->
+  <mat-form-field class="example-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name">
+  </mat-form-field>
+
+  <br>
+  <!-- <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" formControlName="email">
+    <span style="color:red" *ngIf="teacherForm.controls['email'] && teacherForm.controls['email'].invalid && teacherForm.controls['email'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email">
+      </mat-form-field>
+  <br>
+  <!-- <div class="form-group">
+    <label for="contact_number">Contact_Number</label>
+    <input type="text" class="form-control" formControlName="contact_number">
+    <span style="color:red" *ngIf="teacherForm.controls['contact_number'] && teacherForm.controls['contact_number'].invalid && teacherForm.controls['contact_number'].touched">This input field is not valid</span>
+  </div> -->
+
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Contact_Number</mat-label>
+    <input matInput type="text" formControlName="contact_number">
+  </mat-form-field>
+  <br>
+  <!-- <div class="form-group">
+    <label for="state">State</label>
+    <input type="text" class="form-control" formControlName="state">
+    <span style="color:red" *ngIf="teacherForm.controls['state'] && teacherForm.controls['state'].invalid &&
+    teacherForm.controls['state'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>State</mat-label>
+    <input matInput type="text" formControlName="state">
+  </mat-form-field>
+  <br>
+
+  <!-- <div class="form-group">
+    <label for="school_name">School_name</label>
+    <input type="text" class="form-control" formControlName="school_name">
+    <span style="color:red" *ngIf="teacherForm.controls['school_name'] && teacherForm.controls['school_name'].invalid &&
+    teacherForm.controls['school_name'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>School_Name</mat-label>
+    <input matInput type="text" formControlName="school_name">
+  </mat-form-field>
+  <br>
+
+  <div formArrayName="departments">
+    <div>
+      <button type="button" class="btn btn-success" (click)="onAddDepartment()">Add Department</button>
+     <br><br>
+     <!-- <div *ngFor="let department of departmentControls.controls; let f=index;">
+      <input type="text" [formControlName]="f">
+     </div> -->
+     <div *ngFor="let department of departmentControls.controls; let f=index;">
+      <mat-form-field class="example-form-field">
+       <mat-label>Add Department</mat-label>
+       <input matInput type="text" [formControlName]="f">
+     </mat-form-field>
+   </div>
+    </div>
+  </div>
+
+  <!-- <button type="submit" class="btn btn-dark" [disabled]="teacherForm.invalid">Submit</button> -->
+
+  <button mat-flat-button color="primary">Submit</button>
+
+</form>
+
+
+<!-- <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Contact_Number</th>
+      <th scope="col">State</th>
+      <th scope="col">School_name</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tea of teachers">
+      <th scope="row">{{tea.id}}</th>
+      <td>{{tea.name}}</td>
+      <td>{{tea.email}}</td>
+      <td>{{tea.contact_number}}</td>
+      <td>{{tea.state}}</td>
+      <td>{{tea.school_name}}</td>
+      <td><button class="btn btn-danger btn-sm" (click)="deleteTeacher(tea.id)">Delete</button></td>
+      <td><button class="btn btn-info" [routerLink]="['/teacher/edit',tea.id]">Edit</button></td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+   <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID. </th>
+    <td mat-cell *matCellDef="let element"[@simpleFadeAnimation]="'in'"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"[@simpleFadeAnimation]="'in'"> {{element.name}} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="contact_number">
+    <th mat-header-cell *matHeaderCellDef> Contact_Number </th>
+    <td mat-cell *matCellDef="let element"[@simpleFadeAnimation]="'in'"> {{element.contact_number}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef> State</th>
+    <td mat-cell *matCellDef="let element"[@simpleFadeAnimation]="'in'"> {{element.state}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="school_name">
+    <th mat-header-cell *matHeaderCellDef>School_Name</th>
+    <td mat-cell *matCellDef="let element"[@simpleFadeAnimation]="'in'"> {{element.school_name}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td *matCellDef="let element" mat-cell [@simpleFadeAnimation]="'in'">
+      <button mat-mini-fab color="warn" (click)="openDialog(element)"  matTooltip="Delete"><mat-icon>delete</mat-icon></button>
+      <button mat-mini-fab color="accent" (click)="editDialog(element)" style="margin-left: 5px;" matTooltip="Edit"><mat-icon>edit</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Edit</th>
+    <td></td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+

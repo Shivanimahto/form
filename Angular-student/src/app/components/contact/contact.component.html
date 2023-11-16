@@ -1,0 +1,171 @@
+<form [formGroup]="contactForm" (ngSubmit)="insertContact()">
+ <div class="form-group">
+   <!-- <label for="name">Name</label>
+   <input type="text" class="form-control" formControlName="name">
+   <span style="color:red" *ngIf="contactForm.controls['name']&& contactForm.controls['name'].invalid && contactForm.controls['name'].touched">This input field is not valid</span> -->
+   <mat-form-field class="example-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name">
+  </mat-form-field>
+
+   <br>
+   <div formArrayName="emails">
+     <div>
+       <button type="button" class="btn btn-success" (click)="onAddEmail()">Add Email</button>
+     </div>
+     <br>
+     <!-- <div *ngFor="let email of emailControls.controls; let f=index;">
+      <input type="text" [formControlName]="f">
+     </div> -->
+     <div *ngFor="let email of emailControls.controls; let f=index;">
+      <mat-form-field class="example-form-field">
+       <!-- <mat-label>Add Email</mat-label> -->
+       <input matInput type="text"  placeholder="Ex. pat@example.com" [formControlName]="f">
+     </mat-form-field>
+
+     </div>
+   </div>
+
+  <br>
+ <!-- <div class="form-group">
+  <label for="password">Password</label>
+  <input type="text" class="form-control" formControlName="password">
+  <span style="color:red" *ngIf="contactForm.controls['password']&& contactForm.controls['password'].invalid && contactForm.controls['password'].touched">This input field is not valid</span>
+</div> -->
+
+<mat-form-field class="example-form-field">
+  <mat-label>Password</mat-label>
+  <input matInput type="text" formControlName="password">
+</mat-form-field>
+<br>
+<!-- <mat-form-field class="example-form-field">
+  <mat-label>Date Of Birth</mat-label>
+<input matInput [matDatepicker]="myDatePicker" formControlName="birth">
+<mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+<mat-datepicker #myDatePicker></mat-datepicker>
+</mat-form-field> -->
+
+
+<mat-form-field class="example-form-field">
+  <mat-label>Choose a date</mat-label>
+  <input matInput [matDatepicker]="picker" formControlName="birth">
+  <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<br>
+<mat-form-field class="example-form-field">
+<mat-label for="country">Select Country</mat-label>
+<mat-select formControlName="country" >
+  <mat-option value="india">India</mat-option>
+  <mat-option value="usa">USA</mat-option>
+  <mat-option value="japan">Japan</mat-option>
+  <mat-option value="nepal">Nepal</mat-option>
+  <mat-option value="pakistan">pakistan</mat-option>
+   </mat-select>
+</mat-form-field>
+
+
+<br>
+<div formArrayName="phones">
+  <div>
+    <button type="button" class="btn btn-success" (click)="onAddPhone()">Add Phone Number</button>
+  </div>
+  <br>
+  <!-- <div *ngFor="let phone of phoneControls.controls; let i=index;">
+   <input type="text" [formControlName]="i">
+  </div> -->
+  <div *ngFor="let phone of phoneControls.controls; let i=index;">
+    <mat-form-field class="example-form-field">
+     <mat-label>Add Number</mat-label>
+     <input matInput type="text" [formControlName]="i">
+   </mat-form-field>
+   </div>
+
+</div>
+<br>
+
+<!-- <button type="submit" class="btn btn-dark">Submit</button> -->
+<button mat-flat-button color="primary">Submit</button>
+
+</div>
+</form>
+
+<!-- <table class="table" >
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Password</th>
+      <th scope="col">Country</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+
+  <tbody >
+    <tr *ngFor="let con of contacts">
+    <th scope="row">{{con.id}}</th>
+    <td>{{con.name}}</td>
+     <td>{{con.password}}</td>
+     <td>{{con.country}}</td>
+     <td><button class="btn btn-danger btn-sm" (click)="deleteContact(con.id)">Delete</button></td>
+     <td><button class="btn btn-info btn-sm" [routerLink]="['/contact/edit',con.id]">Edit</button></td>
+    </tr>
+    </tbody>
+</table> -->
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.id}} </td>
+  </ng-container>
+
+   <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef> Password </th>
+    <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.password}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="birth">
+    <th mat-header-cell *matHeaderCellDef>Birth</th>
+    <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'">{{element.birth}}</td>
+  </ng-container>
+
+   <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef>Country</th>
+    <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.country}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td *matCellDef="let element" mat-cell [@simpleFadeAnimation]="'in'">
+      <button mat-mini-fab color="warn"  (click)="openDialog(element)" matTooltip="Delete">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-mini-fab color="accent" style="margin-left: 5px;"  (click)="editDialog(element)"  matTooltip="Edit" >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+

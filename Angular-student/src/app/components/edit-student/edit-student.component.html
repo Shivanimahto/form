@@ -1,0 +1,72 @@
+<form [formGroup]="editStudentForm" (ngSubmit)="updateData()">
+  <!-- <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+  </div> -->
+  <mat-form-field class="example-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name">
+  </mat-form-field>
+
+  <!-- <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" formControlName="email">
+  </div> -->
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email">
+      </mat-form-field>
+
+  <!-- <div class="form-group">
+    <label for="branch">Branch</label>
+    <input type="text" class="form-control" formControlName="branch">
+  </div> -->
+  <mat-form-field class="example-form-field">
+    <mat-label>Branch</mat-label>
+    <input matInput type="text" formControlName="branch">
+  </mat-form-field>
+  <br>
+
+  <!-- <div class="form-group">
+    <label for="age">Age</label>
+    <input type="text" class="form-control" formControlName="age">
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Age</mat-label>
+    <input matInput type="text" formControlName="age">
+  </mat-form-field>
+  <br>
+  <!-- <div class="form-group">
+    <label for="contact_number">Contact_Number</label>
+    <input type="text" class="form-control" formControlName="contact_number">
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Contact_Number</mat-label>
+    <input matInput type="text" formControlName="contact_number">
+  </mat-form-field>
+  <br>
+  <br>
+
+  <div formArrayName="skills">
+    <div>
+      <button type="button" class="btn btn-success" (click)="onEditSkill()">Edit Skill</button>
+    </div>
+    <br>
+    <!-- <div *ngFor="let skill of skillControls.controls; let f = index;">
+      <input type="text" [formControlName]="f">
+    </div> -->
+
+    <div *ngFor="let skill of skillControls.controls; let f=index;">
+      <mat-form-field class="example-form-field">
+       <!-- <mat-label>Edit Skill</mat-label> -->
+       <input matInput type="text" [formControlName]="f">
+     </mat-form-field>
+   </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-dark">Update</button>
+
+</form>

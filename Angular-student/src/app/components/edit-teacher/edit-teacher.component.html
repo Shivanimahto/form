@@ -1,0 +1,66 @@
+<form [formGroup]="editTeacherForm" (ngSubmit)="updateTeacher()">
+  <!-- <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name">
+  </mat-form-field>
+  <!-- <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" formControlName="email">
+  </div> -->
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email">
+      </mat-form-field>
+  <!-- <div class="form-group">
+    <label for="contact_number">Contact_Number</label>
+    <input type="text" class="form-control" formControlName="contact_number">
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Contact_Number</mat-label>
+    <input matInput type="text" formControlName="contact_number">
+  </mat-form-field>
+  <!-- <div class="form-group">
+    <label for="state">State</label>
+    <input type="text" class="form-control" formControlName="state">
+  </div> -->
+  <mat-form-field class="example-form-field">
+    <mat-label>State</mat-label>
+    <input matInput type="text" formControlName="state">
+  </mat-form-field>
+  <!-- <div class="form-group">
+    <label for="school_name">School_Name</label>
+    <input type="text" class="form-control" formControlName="school_name">
+  </div> -->
+  <mat-form-field class="example-form-field">
+    <mat-label>School_Name</mat-label>
+    <input matInput type="text" formControlName="school_name">
+  </mat-form-field>
+  <br>
+
+  <div formArrayName="departments">
+    <div>
+      <button type="button" class="btn btn-success" (click)="onEditDepartment()">Edit Department</button>
+    </div>
+    <br>
+    <!-- <div *ngFor="let skill of departmentControls.controls; let f = index;">
+      <input type="text" [formControlName]="f">
+    </div> -->
+
+    <div *ngFor="let department of departmentControls.controls; let f=index;">
+      <mat-form-field class="example-form-field">
+       <input matInput type="text" [formControlName]="f">
+     </mat-form-field>
+   </div>
+  </div>
+  <br>
+  <br>
+  <button type="submit" class="btn btn-dark">Update</button>
+
+</form>

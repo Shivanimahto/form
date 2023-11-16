@@ -1,0 +1,172 @@
+<form [formGroup]="studentForm" (ngSubmit)="insertData()">
+  <!-- <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <span style="color:red" *ngIf="studentForm.controls['name'] && studentForm.controls['name'].invalid && studentForm.controls['name'].touched">This input field is not valid</span>
+  </div> -->
+  <mat-form-field class="example-form-field">
+  <mat-label>Name</mat-label>
+  <input matInput type="text" formControlName="name" placeholder="Ex. Enter Your Name">
+</mat-form-field>
+   <br>
+  <!-- <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" formControlName="email">
+    <span style="color:red" *ngIf="studentForm.controls['email'] && studentForm.controls['email'].invalid && studentForm.controls['email'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email"
+           placeholder="Ex. pat@example.com">
+      </mat-form-field>
+
+
+  <br>
+  <!-- <div class="form-group">
+    <label for="branch">Branch</label>
+    <input type="text" class="form-control" formControlName="branch">
+    <span style="color:red" *ngIf="studentForm.controls['branch'] && studentForm.controls['branch'].invalid && studentForm.controls['branch'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Branch</mat-label>
+    <input matInput type="text" formControlName="branch" placeholder="Ex. Computer-Science">
+  </mat-form-field>
+  <br>
+  <!-- <div class="form-group">
+    <label for="age">Age</label>
+    <input type="text" class="form-control" formControlName="age">
+    <span style="color:red" *ngIf="studentForm.controls['age'] && studentForm.controls['age'].invalid &&
+    studentForm.controls['age'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Age</mat-label>
+    <input matInput type="text" formControlName="age">
+  </mat-form-field>
+  <br>
+  <!-- <div class="form-group">
+    <label for="contact_number">Contact_Number</label>
+    <input type="text" class="form-control" formControlName="contact_number">
+    <span style="color:red" *ngIf="studentForm.controls['contact_number'] && studentForm.controls['contact_number'].invalid && studentForm.controls['contact_number'].touched">This input field is not valid</span>
+  </div> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Contact_Number</mat-label>
+    <input matInput type="text" formControlName="contact_number">
+  </mat-form-field>
+  <br>
+  <div formArrayName="skills">
+    <div>
+      <button type="button" class="btn btn-success" (click)="onAddSkill()">Add Skill</button>
+     <br><br>
+     <!-- <div *ngFor="let skill of skillControls.controls; let f=index;">
+      <input type="text" [formControlName]="f">
+     </div> -->
+     <div *ngFor="let skill of skillControls.controls; let f=index;">
+     <mat-form-field class="example-form-field">
+      <mat-label>Add Skill</mat-label>
+      <input matInput type="text" [formControlName]="f">
+    </mat-form-field>
+    </div>
+
+    </div>
+  </div>
+  <div >
+  <mat-radio-group aria-label="Select an option" formControlName="gender">
+    <mat-radio-button value="male" >Male</mat-radio-button>
+    <mat-radio-button value="female">Female</mat-radio-button>
+  </mat-radio-group>
+
+</div>
+<br>
+
+  <!-- <button type="submit" class="btn btn-dark" [disabled]="studentForm.invalid">Submit</button> -->
+  <button mat-flat-button color="primary">Submit</button>
+</form>
+
+
+<!-- <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Branch</th>
+      <th scope="col">Age</th>
+      <th scope="col">Contact_Number</th>
+      <th scope="col">Gender</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stu of students">
+      <th scope="row">{{stu.id}}</th>
+      <td>{{stu.name}}</td>
+      <td>{{stu.email}}</td>
+      <td>{{stu.branch}}</td>
+      <td>{{stu.age}}</td>
+      <td>{{stu.contact_number}}</td>
+      <td>{{stu.gender}}</td>
+      <td><button class="btn btn-danger btn-sm" (click)="deleteData(stu.id)">Delete</button></td>
+      <td><button class="btn btn-info" [routerLink]="['/edit',stu.id]">Edit</button></td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+   <th mat-header-cell *matHeaderCellDef> ID. </th>
+   <td mat-cell *matCellDef="let element"  [@simpleFadeAnimation]="'in'"> {{element.id}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="name">
+   <th mat-header-cell *matHeaderCellDef> Name </th>
+   <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.name}} </td>
+ </ng-container>
+
+  <ng-container matColumnDef="email">
+   <th mat-header-cell *matHeaderCellDef> Email </th>
+   <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.email}} </td>
+ </ng-container>
+
+  <ng-container matColumnDef="branch">
+   <th mat-header-cell *matHeaderCellDef> Branch </th>
+   <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.branch}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="age">
+   <th mat-header-cell *matHeaderCellDef> Age</th>
+   <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.age}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="contact_number">
+   <th mat-header-cell *matHeaderCellDef>Contact_Number</th>
+   <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.contact_number}} </td>
+ </ng-container>
+
+ <ng-container matColumnDef="gender">
+  <th mat-header-cell *matHeaderCellDef>Gender</th>
+  <td mat-cell *matCellDef="let element" [@simpleFadeAnimation]="'in'"> {{element.gender}} </td>
+</ng-container>
+
+<ng-container matColumnDef="action">
+  <th mat-header-cell *matHeaderCellDef>Action</th>
+  <td *matCellDef="let element" [@simpleFadeAnimation]="'in'">
+    <button mat-mini-fab color="warn"  (click)="openDialog(element)" matTooltip="Delete">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent" (click)="editDialog(element)" style="margin-left: 5px;" matTooltip="Edit">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </td>
+</ng-container>
+
+ <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+ <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

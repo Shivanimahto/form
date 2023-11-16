@@ -1,0 +1,18 @@
+.example-form-field {
+  width: 700px;
+}
+.example-form {
+  width: 700px;
+
+}
+
+.example-full-width {
+  width: 700px;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+table {
+  width: 100%;
+}
